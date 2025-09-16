@@ -9,6 +9,6 @@ package controller;
  *
  * @author 2dami
  */
-public class UserDAO {
+public class Controller {
     
 }
