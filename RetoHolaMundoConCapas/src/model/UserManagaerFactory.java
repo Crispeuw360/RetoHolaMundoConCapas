@@ -5,10 +5,14 @@
  */
 package model;
 
+
 /**
  *
  * @author 2dami
  */
 public class UserManagaerFactory {
     
+       public static User createUser(String username,String password,int age,String residence){
+           return new User(username,password,age,residence);
+       }
 }
