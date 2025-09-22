@@ -1,0 +1,21 @@
+DROP DATABASE IF EXISTS HOLAMUNDOCONCAPAS;
+CREATE DATABASE HOLAMUNDOCONCAPAS;
+
+USE HOLAMUNDOCONCAPAS;
+CREATE TABLE USUARIO
+(USERNAME_ VARCHAR (30) NOT NULL PRIMARY KEY,
+PASSWORD_ VARCHAR (30),
+EDAD_ INTEGER,
+RESIDENCIA_ VARCHAR (30));
+
+INSERT INTO USUARIO (USUARIO_, PASSWORD_, EDAD_, RESIDENCIA_) VALUES
+('juan123', 'passJuan', 25, 'Bilbao'),
+('maria99', 'claveMaria', 30, 'Barakaldo'),
+('pedro_dev', 'p3dr0Pass', 19, 'Getxo'),
+('ana_g', 'ana1234', 27, 'Portugalete'),
+('luis87', 'lu1sPass', 40, 'Santurtzi');
+
+
+
+
+
