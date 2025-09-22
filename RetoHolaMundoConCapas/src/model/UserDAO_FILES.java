@@ -23,6 +23,7 @@ public class UserDAO_FILES {
     }
     
     /**
+     * 
      * Obtiene la información de un usuario
      * @param username Nombre de usuario a buscar
      * @return Objeto User con la información del usuario, o null si no existe
