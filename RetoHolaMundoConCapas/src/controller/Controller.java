@@ -11,4 +11,11 @@ package controller;
  */
 public class Controller {
     
+    
+    UserDAO_BD daoB = 
+    
+    public void visualizarPantalla() {
+      /*  WindowLogin ven = new WindowLogin(this);
+        ven.setVisible(true);*/
+    }
 }

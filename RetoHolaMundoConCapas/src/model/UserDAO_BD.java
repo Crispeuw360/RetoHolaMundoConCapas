@@ -9,6 +9,6 @@ package model;
  *
  * @author 2dami
  */
-public interface UserDAO {
-        public abstract void example_method();
+public class UserDAO_BD{
+        
 }
