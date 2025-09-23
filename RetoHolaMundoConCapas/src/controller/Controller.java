@@ -40,8 +40,16 @@ public class Controller {
         return daoFile.showUser(username);
     }
     
+    public User showUserBD (String username){
+        return daoBD.showUser(username);
+    }
+    public boolean checkUserBD(String username,String password){
+        return daoBD.checkUser(username, password);
+    }
+    
     public void visualizarPantalla() {
       /*  WindowLogin ven = new WindowLogin(this);
         ven.setVisible(true);*/
     }
+    
 }
