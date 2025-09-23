@@ -5,19 +5,21 @@
  */
 package controller;
 
+import model.DAO;
+import model.Factory_BD;
 import model.User;
-import model.UserDAO_FILES;
+import model.Factory_FILES;
 
 /**
  *
  * @author 2dami
  */
 public class Controller {
-    private UserDAO_FILES userDAO;
+    Factory_FILES factoryFile = new Factory_FILES();
+    DAO daoFile = factoryFile.abrirImplementacion();
     
-    public Controller() {
-        this.userDAO = new UserDAO_FILES();
-    }
+    Factory_BD factoryBD = new Factory_BD();
+    DAO daoBD = factoryBD.abrirImplementacion();
     
     /**
      * Verifica si un usuario existe y su contraseña es correcta
@@ -26,7 +28,7 @@ public class Controller {
      * @return true si las credenciales son correctas, false en caso contrario
      */
     public boolean checkUserFile(String username, String password) {
-        return userDAO.checkUser(username, password);
+        return daoFile.checkUser(username, password);
     }
     
     /**
@@ -35,7 +37,7 @@ public class Controller {
      * @return Objeto User con la información del usuario, o null si no existe
      */
     public User showUserFile(String username) {
-        return userDAO.showUser(username);
+        return daoFile.showUser(username);
     }
     
     public void visualizarPantalla() {

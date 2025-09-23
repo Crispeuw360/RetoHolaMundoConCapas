@@ -6,7 +6,7 @@ import java.io.*;
  * Implementación de DAO para manejar usuarios usando Object Input/Output
  * @author 2dami
  */
-public class ImplementsFIle implements DAO {
+public class ImplementsFile implements DAO {
     private static final String USERS_FILE = "users.dat";
     
     @Override

@@ -5,14 +5,15 @@
  */
 package model;
 
-
 /**
  *
  * @author 2dami
  */
-public class UserManagerFactory {
+public class Factory_BD{
     
-    public static User createUser(String username, String password, int age, String residence) {
-        return new User(username, password, age, residence);
-    }
+public DAO abrirImplementacion(){
+        DAO dao = new ImplementsBD();
+         
+         return dao;
+    }    
 }
