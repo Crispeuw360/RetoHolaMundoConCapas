@@ -5,85 +5,99 @@
  */
 package model;
 
-import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.TreeMap;
 
 /**
- * Implementation of the WorkerDAO interface that provides database access
- * operations using JDBC.
- * 
- * <p>This class handles all database interactions for the application,
- including CRUD operations for workers, units, clients, and dealerships.</p>
  *
- * @author All
- * @version 1.0
+ * @author 2dami
  */
-public class ImplementsBD implements DAO {
-    // Atributos
-    private Connection con;
-    private PreparedStatement stmt;
+public class ImplementsBD implements DAO{        
+    	private Connection con;
+	private PreparedStatement stmt;
+        
+        private ResourceBundle configFile;
+	private String driverBD;
+	private String urlBD;
+	private String userBD;
+	private String passwordBD;
+        
+        
+       final String SQLGETUSER ="SELECT USERNAME_, PASSWORD_, EDAD_, RESIDENCIA_ FROM USUARIO WHERE USERNAME_ = ?";
+       final String SQLCHECK ="SELECT 1 FROM USUARIO WHERE USERNAME_=? AND PASSWORD_=?";
+        
+        
+        public ImplementsBD() {
+		this.configFile = ResourceBundle.getBundle("model.configClase");
+		this.driverBD = this.configFile.getString("Driver");
+		this.urlBD = this.configFile.getString("Conn");
+		this.userBD = this.configFile.getString("DBUser");
+		this.passwordBD = this.configFile.getString("DBPass");
+	}
+        
+        private void openConnection() {
+            try {
+                con = DriverManager.getConnection(urlBD, this.userBD, this.passwordBD);
+            } catch (SQLException e) {
+                System.out.println("Error al intentar abrir la BD");
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }  
+        
+        public boolean checkUser(String username, String password) {
+            boolean exists = false;
+            this.openConnection();
 
-    // Los siguientes atributos se utilizan para recoger los valores del fich de
-    // configuraci n
-    private ResourceBundle configFile;
-    private String driverBD;
-    private String urlBD;
-    private String userBD;
-    private String passwordBD;
+            try {
+                stmt = con.prepareStatement(SQLCHECK);
+                stmt.setString(1, username);
+                stmt.setString(2, password);
 
-    // SQL queries
-    final String SQLINSERTUNIT = "INSERT INTO unit (id, acronim, title, evaluation, description) VALUES(?,?,?,?,?);";
-    final String SQLINSERTSESSION = "INSERT INTO sessionE  (Esession, descripcion, Edate, course) VALUES  (?,?,?,?);";
-    final String SQLINSERTSTATEMENT = "INSERT INTO statement  (id,description,Dlevel,available,path,Esession) VALUES  (?,?,?,?,?,?);";
-    final String SQLINSERTUNIT_STATEMENT = "INSERT INTO unit_statement(idU,idS)   VALUES  (?,?);";
-    
-    final String SQLVIEWSTATEMENTBYID = "SELECT * FROM statement WHERE id IN(SELECT idS FROM unit_statement WHERE idU IN(SELECT id FROM unit WHERE id=?));";
-    final String SQLGETSESSIONFROMSTATEMENT = "SELECT Esession FROM statement WHERE id=?;";
+                ResultSet rs = stmt.executeQuery();
+                exists = rs.next(); // si hay al menos un resultado → existe
 
+                rs.close();
+                stmt.close();
+                con.close();
+            } catch (SQLException e) {
+                System.out.println("Error al comprobar usuario: " + e.getMessage());
+            }
 
-    /**
-     * Constructs a new ImplementsBD instance and loads database configuration.
-     */
-    public ImplementsBD() {
-        this.configFile = ResourceBundle.getBundle("model.configClase");
-        this.driverBD = this.configFile.getString("Driver");
-        this.urlBD = this.configFile.getString("Conn");
-        this.userBD = this.configFile.getString("DBUser");
-        this.passwordBD = this.configFile.getString("DBPass");
-    }
-
-    /**
-     * Opens a connection to the database using configured parameters.
-     */
-    private void openConnection() {
-        try {
-            con = DriverManager.getConnection(urlBD, this.userBD, this.passwordBD);
-        } catch (SQLException e) {
-            System.out.println("Error al intentar abrir la BD");
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+            return exists;
         }
-    }
+        
+        public User showUser(String username) {
+            User u = null;
+            this.openConnection();
 
+            try {
+                stmt = con.prepareStatement("SELECT USERNAME_, PASSWORD_, EDAD_, RESIDENCIA_ FROM USUARIO WHERE USERNAME_=?");
+                stmt.setString(1, username);
 
-    @Override
-    public boolean checkUser(String username, String password) {
-        return false;
-    }
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    u = new User(
+                        rs.getString("USERNAME_"),
+                        rs.getString("PASSWORD_"),
+                        rs.getInt("EDAD_"),
+                        rs.getString("RESIDENCIA_")
+                    );
+                }
 
-    @Override
-    public User showUser(String username) {
-        return null;
-    }
+                rs.close();
+                stmt.close();
+                con.close();
+            } catch (SQLException e) {
+                System.out.println("Error al mostrar usuario: " + e.getMessage());
+            }
+
+            return u; // puede ser null si no existe
+        }  
+
 }
