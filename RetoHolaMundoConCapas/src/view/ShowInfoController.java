@@ -40,6 +40,7 @@ public class ShowInfoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        Spane.setContent();
     }    
 
     @FXML
