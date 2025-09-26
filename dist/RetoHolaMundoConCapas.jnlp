@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="RetoHolaMundoConCapas.jnlp">
+  <information>
+    <title>RetoHolaMundoConCapas</title>
+    <vendor>2dami</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="RetoHolaMundoConCapas.jar" size="2032664" download="eager" />
+    <jar href="lib\mysql-connector-java-8.0.15.jar" size="2134905" download="eager" />
+  </resources>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="RetoHolaMundoConCapas" >
+    <param name="requiredFXVersion" value="8.0+"/>
+  </applet-desc>
+  <jfx:javafx-desc  width="800" height="600" main-class="view.RetoHolaMundoConCapas"  name="RetoHolaMundoConCapas" />
+  <update check="always"/>
+</jnlp>
