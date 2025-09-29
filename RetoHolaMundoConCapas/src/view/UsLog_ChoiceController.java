@@ -100,14 +100,16 @@ public class UsLog_ChoiceController implements Initializable {
                     } else {
                         lblMSG.setText("The username or the password is incorrect.");
                     }
-                } else {
-                    if (rdDB.isSelected()) {
+                } else if (rbFile.isSelected()) { 
+                    
                         Stage stage = new Stage();
 
                         User usuario = cont.showUserFile(usname);
+                        System.out.println(usuario);
                         if (usuario != null && usuario.getPassword().equals(pass)) {
                             Parent root;
                             try {
+                                
                                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ShowInfo.fxml"));
                                 root = loader.load();
                                 Scene scene;
@@ -136,4 +138,4 @@ public class UsLog_ChoiceController implements Initializable {
 
     }
 
-}
+

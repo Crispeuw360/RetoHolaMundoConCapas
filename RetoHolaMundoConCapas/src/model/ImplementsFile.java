@@ -25,6 +25,9 @@ public class ImplementsFile implements DAO {
 
     @Override
     public User showUser(String username) {
+        if(!USERS_FILE.exists()){
+            addDataUser();
+        }
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(USERS_FILE))) {
             User user = (User) ois.readObject();
             if (user.getUsername().equals(username)) {
