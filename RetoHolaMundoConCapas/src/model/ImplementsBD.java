@@ -32,7 +32,7 @@ public class ImplementsBD implements DAO{
         
         
         public ImplementsBD() {
-		this.configFile = ResourceBundle.getBundle("model.configClase");
+		this.configFile = ResourceBundle.getBundle("configClase");
 		this.driverBD = this.configFile.getString("Driver");
 		this.urlBD = this.configFile.getString("Conn");
 		this.userBD = this.configFile.getString("DBUser");

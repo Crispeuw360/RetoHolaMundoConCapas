@@ -5,6 +5,7 @@
  */
 package view;
 
+import controller.Controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,6 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.User;
 
 /**
  *
@@ -49,6 +51,8 @@ public class UsLog_ChoiceController implements Initializable {
     @FXML
     private Label lblMSG;
 
+    private Controller cont = new Controller();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -57,6 +61,7 @@ public class UsLog_ChoiceController implements Initializable {
     @FXML
     private void LogIn(ActionEvent event) {
         String usname = txtUsName.getText();
+
         String pass = pswrPass.getText();
         if (usname.equals("") || pass.equals("")) {
             lblMSG.setText("Input your Username or/and Password before proceeding.");
@@ -66,25 +71,69 @@ public class UsLog_ChoiceController implements Initializable {
             } else {
                 if (rdDB.isSelected()) {
                     Stage stage = new Stage();
-                    Parent root;
-                    try {
-                        root = FXMLLoader.load(getClass().getResource("ShowInfo.fxml"));
-                        Scene scene;
-                        scene = new Scene(root);
-                        stage = new Stage(StageStyle.DECORATED);
-                        stage.setScene(scene);
-                        stage.show();
-                    } catch (IOException ex) {
-                        Logger.getLogger(UsLog_ChoiceController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    Node source = (Node) event.getSource();     //Me devuelve el elemento al que hice click
-                    Stage stagen = (Stage) source.getScene().getWindow();    //Me devuelve la ventana donde se encuentra el elemento
-                    stagen.close();
-                } else {
 
+                    User usuario = cont.showUserBD(usname);
+
+                    if (usuario != null && usuario.getPassword().equals(pass)) {
+                        Parent root;
+                        try {
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ShowInfo.fxml"));
+                            root = loader.load();
+
+                            Scene scene;
+                            scene = new Scene(root);
+                            stage = new Stage(StageStyle.DECORATED);
+                            stage.setScene(scene);
+
+                            ShowInfoController shcont = loader.getController();
+
+                            shcont.setAll(usuario);
+
+                            stage.show();
+                        } catch (IOException ex) {
+                            Logger.getLogger(UsLog_ChoiceController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                        Node source = (Node) event.getSource();     //Me devuelve el elemento al que hice click
+                        Stage stagen = (Stage) source.getScene().getWindow();    //Me devuelve la ventana donde se encuentra el elemento
+                        stagen.close();
+                    } else {
+                        lblMSG.setText("The username or the password is incorrect.");
+                    }
+                } else {
+                    if (rdDB.isSelected()) {
+                        Stage stage = new Stage();
+
+                        User usuario = cont.showUserFile(usname);
+                        if (usuario != null && usuario.getPassword().equals(pass)) {
+                            Parent root;
+                            try {
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ShowInfo.fxml"));
+                                root = loader.load();
+                                Scene scene;
+                                scene = new Scene(root);
+                                stage = new Stage(StageStyle.DECORATED);
+                                stage.setScene(scene);
+
+                                ShowInfoController shcont = loader.getController();
+
+                                shcont.setAll(usuario);
+
+                                stage.show();
+                            } catch (IOException ex) {
+                                Logger.getLogger(UsLog_ChoiceController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            Node source = (Node) event.getSource();     //Me devuelve el elemento al que hice click
+                            Stage stagen = (Stage) source.getScene().getWindow();    //Me devuelve la ventana donde se encuentra el elemento
+                            stagen.close();
+                        } else {
+                            lblMSG.setText("The username or the password is incorrect.");
+                        }
+                    }
                 }
             }
         }
+
     }
 
 }

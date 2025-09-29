@@ -18,9 +18,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.User;
 
 /**
  * FXML Controller class
@@ -32,7 +34,15 @@ public class ShowInfoController implements Initializable {
     @FXML
     private Button GoBack;
     @FXML
-    private ScrollPane Spane;
+    private Label lblUsname;
+    @FXML
+    private Label lblPasswrd;
+    @FXML
+    private Label lblAge;
+    @FXML
+    private Label lblBrthplc;
+    
+    private User us;
 
     /**
      * Initializes the controller class.
@@ -40,8 +50,19 @@ public class ShowInfoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        Spane.setContent();
+        
     }    
+    public void setAll(User user) {
+        this.us=user;
+        lblUsname.setText(us.getUsername());
+        lblPasswrd.setText(us.getPassword());
+        lblAge.setText(us.getAge()+"");
+        lblBrthplc.setText(us.getResidence());
+    }
+
+    public ShowInfoController() {
+    }
+    
 
     @FXML
     private void closeAccount(ActionEvent event) {
@@ -61,5 +82,5 @@ public class ShowInfoController implements Initializable {
                     Stage stagen = (Stage) source.getScene().getWindow();    //Me devuelve la ventana donde se encuentra el elemento
                     stagen.close();
     }
-    
+   
 }
