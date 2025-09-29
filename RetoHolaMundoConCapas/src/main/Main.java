@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package main;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,14 +15,14 @@ import javafx.stage.Stage;
  *
  * @author 2dami
  */
-public class RetoHolaMundoConCapas extends Application {
+public class Main extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/view/UsLog_Choice.fxml"));
         
         Scene scene = new Scene(root);
-        
+        stage.setTitle("User Log In Page");
         stage.setScene(scene);
         stage.show();
     }

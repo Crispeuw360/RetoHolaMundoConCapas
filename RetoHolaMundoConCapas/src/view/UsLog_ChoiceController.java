@@ -83,6 +83,8 @@ public class UsLog_ChoiceController implements Initializable {
                             Scene scene;
                             scene = new Scene(root);
                             stage = new Stage(StageStyle.DECORATED);
+                            stage.setTitle("User "+usuario.getUsername()+"'s info from Database");
+
                             stage.setScene(scene);
 
                             ShowInfoController shcont = loader.getController();
@@ -115,6 +117,7 @@ public class UsLog_ChoiceController implements Initializable {
                                 Scene scene;
                                 scene = new Scene(root);
                                 stage = new Stage(StageStyle.DECORATED);
+                                stage.setTitle("User "+usuario.getUsername()+"'s info from Local File");
                                 stage.setScene(scene);
 
                                 ShowInfoController shcont = loader.getController();
