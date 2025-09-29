@@ -57,12 +57,4 @@ public class Controller {
     public boolean checkUserBD(String username,String password){
         return daoBD.checkUser(username, password);
     }
-    /**
-     * Muestra la pantalla principal de la aplicación.
-     * Actualmente el código de la ventana está deshabilitado.
-     */
-    public void visualizarPantalla() {
-      /*  WindowLogin ven = new WindowLogin(this);
-          ven.setVisible(true); */
-    }
 }
