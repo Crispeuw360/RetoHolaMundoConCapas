@@ -33,20 +33,36 @@ public class Controller {
     
     /**
      * Obtiene la información de un usuario
-     * @param username Nombre de usuario a buscar
      * @return Objeto User con la información del usuario, o null si no existe
      */
     public User showUserFile(String username) {
         return daoFile.showUser(username);
     }
-     public User showUserBD (String username){
-        return daoBD.showUser(username);
+    /**
+     * Obtiene la información de un usuario desde la base de datos.
+     *
+     * @param username Nombre de usuario a buscar
+     * @return Objeto User con la información del usuario, o null si no existe
+     */
+    public User showUserBD (String username){
+       return daoBD.showUser(username);
     }
+    /**
+     * Verifica si un usuario existe y su contraseña es correcta en la base de datos.
+     *
+     * @param username Nombre de usuario
+     * @param password Contraseña
+     * @return true si las credenciales son correctas, false en caso contrario
+     */
     public boolean checkUserBD(String username,String password){
         return daoBD.checkUser(username, password);
     }
+    /**
+     * Muestra la pantalla principal de la aplicación.
+     * Actualmente el código de la ventana está deshabilitado.
+     */
     public void visualizarPantalla() {
       /*  WindowLogin ven = new WindowLogin(this);
-        ven.setVisible(true);*/
+          ven.setVisible(true); */
     }
 }

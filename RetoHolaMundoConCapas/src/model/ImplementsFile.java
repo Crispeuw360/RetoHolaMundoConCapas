@@ -7,9 +7,17 @@ import java.io.*;
  * 
  * @author 2dami
  */
-public class ImplementsFile implements DAO {
+ public class ImplementsFile implements DAO {
     private File USERS_FILE = new File("users.dat");
 
+    /**
+     * Verifica si un usuario con el nombre de usuario y la contraseña proporcionados existe en el archivo.
+     * Si el archivo no existe, se crea con datos de ejemplo mediante {@link #addDataUser()}.
+     *
+     * @param username Nombre de usuario a verificar
+     * @param password Contraseña a verificar
+     * @return true si las credenciales coinciden con un usuario almacenado; false en caso contrario o si ocurre un error de E/S
+     */
     @Override
     public boolean checkUser(String username, String password) {
         if(!USERS_FILE.exists()){
@@ -23,6 +31,13 @@ public class ImplementsFile implements DAO {
         }
     }
 
+    /**
+     * Busca y devuelve un usuario por su nombre de usuario desde el archivo de datos.
+     * Si el archivo no existe, se inicializa con datos de ejemplo mediante {@link #addDataUser()}.
+     *
+     * @param username Nombre de usuario a buscar
+     * @return El objeto {@code User} si se encuentra; {@code null} si no existe o si ocurre un error
+     */
     @Override
     public User showUser(String username) {
         if(!USERS_FILE.exists()){
@@ -40,6 +55,10 @@ public class ImplementsFile implements DAO {
         }
     }
 
+    /**
+     * Inicializa el archivo de usuarios con un conjunto de datos de ejemplo.
+     * Este método sobrescribe el archivo si ya existiera contenido previo.
+     */
     public void addDataUser() {
         User pedro = new User("Pedro", "1234", 34, "Puerto Rico");
         User jose = new User("Jose", "4321", 27, "Santurtzi");

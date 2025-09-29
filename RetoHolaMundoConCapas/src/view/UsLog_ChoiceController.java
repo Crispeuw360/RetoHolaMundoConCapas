@@ -29,7 +29,10 @@ import javafx.stage.StageStyle;
 import model.User;
 
 /**
- *
+ * Controlador de la vista UsLog_Choice.fxml.
+ * Gestiona el inicio de sesión del usuario permitiendo elegir entre archivo o base de datos
+ * como origen de datos.
+ * 
  * @author 2dami
  */
 public class UsLog_ChoiceController implements Initializable {
@@ -54,11 +57,25 @@ public class UsLog_ChoiceController implements Initializable {
     private Controller cont = new Controller();
 
     @Override
+    /**
+     * Inicializa el controlador.
+     * Actualmente no realiza ninguna acción.
+     * 
+     * @param url no utilizado
+     * @param rb no utilizado
+     */
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
 
     @FXML
+    /**
+     * Gestiona el flujo de inicio de sesión cuando el usuario pulsa el botón.
+     * Valida entradas, comprueba la fuente de datos seleccionada y, si las
+     * credenciales son correctas, abre la vista de información del usuario.
+     * 
+     * @param event Evento de acción del botón de login
+     */
     private void LogIn(ActionEvent event) {
         String usname = txtUsName.getText();
 

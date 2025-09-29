@@ -25,8 +25,9 @@ import javafx.stage.StageStyle;
 import model.User;
 
 /**
- * FXML Controller class
- *
+ * Controlador de la vista ShowInfo.fxml.
+ * Muestra la información del usuario y permite volver a la pantalla de login.
+ * 
  * @author 2dami
  */
 public class ShowInfoController implements Initializable {
@@ -45,13 +46,22 @@ public class ShowInfoController implements Initializable {
     private User us;
 
     /**
-     * Initializes the controller class.
+     * Inicializa el controlador.
+     * Actualmente no realiza ninguna acción.
+     * 
+     * @param url no utilizado
+     * @param rb no utilizado
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         
     }    
+    /**
+     * Establece el usuario a visualizar y actualiza las etiquetas de la vista con sus datos.
+     * 
+     * @param user Usuario cuyos datos se muestran
+     */
     public void setAll(User user) {
         this.us=user;
         lblUsname.setText(us.getUsername());
@@ -60,11 +70,19 @@ public class ShowInfoController implements Initializable {
         lblBrthplc.setText(us.getResidence());
     }
 
+    /**
+     * Constructor por defecto.
+     */
     public ShowInfoController() {
     }
     
 
     @FXML
+    /**
+     * Cierra la ventana actual y abre la pantalla de selección de login.
+     * 
+     * @param event Evento de acción del botón
+     */
     private void closeAccount(ActionEvent event) {
         Stage stage = new Stage();
                     Parent root;

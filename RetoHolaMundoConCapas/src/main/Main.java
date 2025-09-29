@@ -12,12 +12,20 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- *
+ * Aplicación JavaFX principal que carga la vista inicial `UsLog_Choice.fxml`.
+ * Configura y muestra la ventana principal de la aplicación.
+ * 
  * @author 2dami
  */
 public class Main extends Application {
     
     @Override
+    /**
+     * Punto de entrada de JavaFX. Carga el FXML inicial y muestra la escena.
+     * 
+     * @param stage Escenario principal proporcionado por el sistema JavaFX
+     * @throws Exception si ocurre un error al cargar el recurso FXML
+     */
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/view/UsLog_Choice.fxml"));
         
@@ -28,7 +36,9 @@ public class Main extends Application {
     }
 
     /**
-     * @param args the command line arguments
+     * Método main de la aplicación.
+     * 
+     * @param args Argumentos de línea de comandos
      */
     public static void main(String[] args) {
         
